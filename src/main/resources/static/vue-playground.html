@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Vue.js playground</title>
+    <link href="css/vue-playground.css" rel="stylesheet" type="text/css">
+
+    <script src="js/vue.js"></script>
+    <script src="js/vue-resource.js"></script>
+    <script src="js/vue-playground.js"></script>
+</head>
+<body>
+
+<script type="text/x-template" id="grid-template">
+    <table>
+        <thead>
+        <tr>
+            <th v-for="key in columns"
+                v-on:click="sortBy(key)"
+                v-bind:class="{ active: sortKey == key }">
+                {{ key | capitalize }}
+                <span class="arrow" v-bind:class="sortOrders[key] > 0 ? 'asc' : 'dsc'">
+          </span>
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr v-for="entry in filteredData">
+            <td v-for="key in columns">
+                {{entry[key]}}
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</script>
+
+<div id="app">
+    <h2>Try bind</h2>
+    <span v-bind:title="title">{{ message }}</span>
+</div>
+
+<div id="app1">
+    <h2>Try if else</h2>
+    <p v-if="visible">Can you see me?</p>
+</div>
+
+<div id="app2">
+    <h2>Try for loop</h2>
+    <h3>NBA Stars</h3>
+    <ol>
+        <li v-for="ele in elements">
+            {{ ele.name }}
+        </li>
+    </ol>
+</div>
+
+<div id="app3">
+    <h2>Try method</h2>
+    <p>{{ message }}</p>
+    <button v-on:click="reverse">REVERSE</button>
+</div>
+
+<div id="app4">
+    <h2>Try v-model</h2>
+    <p>{{ message }}</p>
+    <label>
+        <input v-model="message">
+    </label>
+</div>
+
+<div id="app5">
+    <h2>Try model</h2>
+    <ol>
+        <players v-for="player in players" v-bind:player="player"></players>
+    </ol>
+</div>
+
+<div id="app6">
+    <h2>Try http</h2>
+    <form id="search">
+        Search <input name="query" v-model="searchQuery">
+    </form>
+    <grid :data="gridData" :columns="gridColumns" :filter-key="searchQuery"></grid>
+</div>
+
+</body>
+</html>
